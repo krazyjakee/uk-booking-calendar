@@ -8,6 +8,7 @@ const PUBLIC_ROUTES = [
   "/login",
   "/register",
   "/api/graphql",
+  "/api/chat/",
 ];
 
 function getSecretKey(): Uint8Array {

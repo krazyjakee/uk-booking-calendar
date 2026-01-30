@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Generated widget bundle
+    "public/widget.js",
+    // Widget source (Preact, separate tsconfig)
+    "src/widget/**",
   ]),
 ]);
 

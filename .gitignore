@@ -40,6 +40,9 @@ next-env.d.ts
 *.sqlite3
 *.db
 
+# widget build output
+/public/widget.js
+
 # claude/agents
 AGENTS.local.db
 .mcp.json
