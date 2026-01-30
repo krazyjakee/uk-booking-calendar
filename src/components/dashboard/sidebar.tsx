@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
   Bot,
+  Eye,
   HelpCircle,
   Globe,
   MessageSquare,
@@ -37,6 +38,11 @@ const navItems = [
     label: "Messages",
     href: "/dashboard/chatbot/messages",
     icon: MessageSquare,
+  },
+  {
+    label: "Widget Demo",
+    href: "/dashboard/chatbot/demo",
+    icon: Eye,
   },
 ];
 
