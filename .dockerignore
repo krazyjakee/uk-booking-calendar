@@ -1,0 +1,10 @@
+node_modules
+.next
+.git
+.gitignore
+.claude
+.mcp.json
+*.md
+data/*.sqlite3
+data/*.sqlite
+data/*.db

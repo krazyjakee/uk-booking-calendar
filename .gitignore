@@ -34,3 +34,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# sqlite
+*.sqlite
+*.sqlite3
+*.db
+
+# claude/agents
+AGENTS.local.db
+.mcp.json
+.claude
