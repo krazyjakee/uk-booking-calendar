@@ -12,7 +12,8 @@
     "db:rollback": "tsx node_modules/.bin/knex migrate:rollback --knexfile knexfile.ts",
     "test": "NODE_OPTIONS='--import tsx/esm' vitest run",
     "test:watch": "NODE_OPTIONS='--import tsx/esm' vitest",
-    "test:coverage": "NODE_OPTIONS='--import tsx/esm' vitest run --coverage"
+    "test:coverage": "NODE_OPTIONS='--import tsx/esm' vitest run --coverage",
+    "setup": "npm i && npm run db:migrate && npm run dev"
   },
   "dependencies": {
     "@pothos/core": "^4.12.0",

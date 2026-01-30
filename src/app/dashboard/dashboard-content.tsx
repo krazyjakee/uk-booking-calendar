@@ -26,7 +26,13 @@ export function DashboardContent({ name, email, role }: DashboardContentProps) {
   async function handleLogout() {
     setLoggingOut(true);
     try {
-      await fetch("/api/auth/logout", { method: "POST" });
+      await fetch("/api/graphql", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          query: `mutation { logout }`,
+        }),
+      });
       router.push("/login");
       router.refresh();
     } catch {

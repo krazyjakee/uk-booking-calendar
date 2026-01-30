@@ -7,9 +7,6 @@ const AUTH_COOKIE_NAME = "auth-token";
 const PUBLIC_ROUTES = [
   "/login",
   "/register",
-  "/api/auth/login",
-  "/api/auth/register",
-  "/api/auth/logout",
   "/api/graphql",
 ];
 

@@ -44,16 +44,21 @@ export function LoginForm({ redirectTo }: LoginFormProps) {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/auth/login", {
+      const response = await fetch("/api/graphql", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim(), password }),
+        body: JSON.stringify({
+          query: `mutation Login($input: LoginInput!) {
+            login(input: $input) { user { id email name role } }
+          }`,
+          variables: { input: { email: email.trim(), password } },
+        }),
       });
 
       const data = await response.json();
 
-      if (!response.ok) {
-        setError(data.error || "Something went wrong. Please try again.");
+      if (data.errors?.length) {
+        setError(data.errors[0].message || "Something went wrong. Please try again.");
         return;
       }
 

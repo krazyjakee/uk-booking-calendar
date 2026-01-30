@@ -64,27 +64,42 @@ export function RegisterForm({ isAdmin, isAuthenticated }: RegisterFormProps) {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/auth/register", {
+      const roleMap: Record<string, string> = {
+        admin: "ADMIN",
+        tradesman: "TRADESMAN",
+        manager: "MANAGER",
+      };
+
+      const response = await fetch("/api/graphql", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: name.trim(),
-          email: email.trim(),
-          password,
-          ...(isAdmin ? { role } : {}),
+          query: `mutation Register($input: RegisterInput!) {
+            register(input: $input) { user { id email name role } }
+          }`,
+          variables: {
+            input: {
+              name: name.trim(),
+              email: email.trim(),
+              password,
+              ...(isAdmin ? { role: roleMap[role] } : {}),
+            },
+          },
         }),
       });
 
       const data = await response.json();
 
-      if (!response.ok) {
-        setError(data.error || "Something went wrong. Please try again.");
+      if (data.errors?.length) {
+        setError(data.errors[0].message || "Something went wrong. Please try again.");
         return;
       }
 
+      const user = data.data.register.user;
+
       if (isAdmin && isAuthenticated) {
         // Admin creating an account — show success and reset form
-        setSuccess(`Account created for ${data.user.email} (${data.user.role}).`);
+        setSuccess(`Account created for ${user.email} (${user.role}).`);
         setName("");
         setEmail("");
         setPassword("");
